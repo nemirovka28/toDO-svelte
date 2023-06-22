@@ -7,7 +7,6 @@
 
     let text = '';
 
-
     function handleClick () {
        dispatch('add', text )
     }
