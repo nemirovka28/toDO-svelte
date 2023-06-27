@@ -11,24 +11,18 @@
        dispatch('add', text )
     }
 
-    function handleTextonInput (event) {
-       // Todo
-       text = event.target.value;
-      
-    }
-
 
 
 </script>
 
-
+ 
 <div class="main-container">
 <label for="todo-text">{title}</label>
 <input 
     class="todo-input" 
     type="text" 
     id="todo-text"
-    on:input={handleTextonInput}
+    bind:value={text}
     >
 <button on:click={handleClick} >{buttonTitle}</button>
 </div>

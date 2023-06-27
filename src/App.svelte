@@ -19,23 +19,25 @@
     function handleClick (event) {
         items = [...items, {
             id: uuid(),
-            text: event.detail
+            text: event.detail,
+			done: false,
         }]
     }
 
 
 </script>
 
-
 <AddTodoitem on:add={handleClick} />
-
+{items.filter(item=>item.done).length}
 {#if items.length === 0}
 
 <div>No items yet</div>
 {:else}
-{#each items as {id, text}, index (id)}
+{#each items as {id, text, done}, index (id)}
 <div>
-	<TodoItem title={`${index + 1}: ${text}`}/>
+	<TodoItem 
+	title={`${index + 1}: ${text}`} 
+	bind:done={done}/>
 </div>
 {/each}
 
