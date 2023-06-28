@@ -1,11 +1,11 @@
 import { writable } from "svelte/store";
-import {v4 as uuid} from './uuid';
+import { v4 as uuid } from 'uuid';
 
 function createTodoStore () {
 const {subscribe, set, update, } = writable([])
 
     return {
-        
+
         subscribe,
 
         add: (text) => {
