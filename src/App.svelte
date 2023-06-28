@@ -1,47 +1,72 @@
 <script>
+
 	import { v4 as uuid } from 'uuid';
-	import {onMount} from 'svelte';
-	import {getTodos} from '../src/utils/getTodos';
 	import AddTodoitem from "./components/AddTodoitem.svelte";
 	import TodoItem from './components/TodoItem.svelte';
+	import {todoItems} from './store/customStore';
+	// import {todoItems} from './store/store';
+//  если обновления стора внутри компонента:
+    // function handleClick (event) {
+	// 	todoItems.update( items => {
+	// 		return [ ...items, {
+	// 		id: uuid(),
+    //         text: event.detail,
+	// 		done: false,
+	// 		}]
+	// 	})
+    // }
 
-	let items = [];
+	// function handleDoneChange (id, done) {
+    //     todoItems.update( items => {
+	// 		return items.map(item => {
+	// 			if(item.id === id ){
+	// 				return {
+	// 					...item, done
+	// 				}
+	// 			} else {
+	// 				return item
+	// 			}
+	// 		})
+	// 	})
 
-
-	onMount ( ()=>{
-		const get = async () => {
-			items = await getTodos()
-		}
-		get()
-	})
-
-	 
-    function handleClick (event) {
-        items = [...items, {
-            id: uuid(),
-            text: event.detail,
-			done: false,
-        }]
+    // }
+	
+	   function handleClick (event) {
+		todoItems.add(event.detail)
     }
 
+	function handleDoneChange (id, done) {
+        todoItems.setDone(id, done)
+
+    }
+
+	function handleRemoveChange (id) {
+		todoItems.remove(id)
+	}
 
 </script>
 
 <AddTodoitem on:add={handleClick} />
-{items.filter(item=>item.done).length}
-{#if items.length === 0}
 
-<div>No items yet</div>
-{:else}
-{#each items as {id, text, done}, index (id)}
+{$todoItems.filter(item=>item.done).length} / {$todoItems.length}
+
+{#each $todoItems as {id, text, done}, index (id)}
+
 <div>
 	<TodoItem 
 	title={`${index + 1}: ${text}`} 
-	bind:done={done}/>
+	done={done}
+	on:doneChange={ event => handleDoneChange ( id, event.detail ) }
+	on:remove={()=>handleRemoveChange(id)}
+	/>
 </div>
+
+{:else}
+
+<div>No items yet</div>
+
 {/each}
 
-{/if}
 
 <style>
 	

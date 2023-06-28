@@ -1,15 +1,30 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
+
     export let title
     export let done
 
  
     function handleRemoveClick () {
-        console.log('handleRemoveClick');
+       
+        dispatch('remove')
     }
+
+    function handleDonechange (event) {
+        dispatch('doneChange', event.target.checked)
+
+    }
+
 </script>
 
 <div class="main-container">
-    <input type="checkbox" bind:checked={done} />
+    <input 
+        checked={done}
+        type="checkbox" 
+        on:input={handleDonechange} 
+    />
 <p class="title">{title}</p>
 <p class="remove-button" on:click={handleRemoveClick} >Remove</p>
 </div>
