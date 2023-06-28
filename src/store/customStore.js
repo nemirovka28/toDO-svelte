@@ -2,6 +2,7 @@ import { writable } from "svelte/store";
 import { v4 as uuid } from 'uuid';
 
 function createTodoStore () {
+
 const {subscribe, set, update, } = writable([])
 
     return {
@@ -40,5 +41,7 @@ const {subscribe, set, update, } = writable([])
     }
 
 }
+
+console.log(createTodoStore ());
 
 export const todoItems = createTodoStore ()

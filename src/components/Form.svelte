@@ -1,6 +1,9 @@
 <script>
+
     import { createEventDispatcher } from 'svelte';
+
     export let title = 'Enter what do you wont to do';
+
     export let buttonTitle = 'Add Todo';
 
     const dispatch = createEventDispatcher();
@@ -8,7 +11,11 @@
     let text = '';
 
     function handleClick () {
-       dispatch('add', text )
+        
+        dispatch('add', text )
+        text = ''
+        document.querySelector('.todo-input').value = "";
+       
     }
 
 
@@ -17,14 +24,18 @@
 
  
 <div class="main-container">
+
 <label for="todo-text">{title}</label>
+
 <input 
     class="todo-input" 
     type="text" 
     id="todo-text"
     bind:value={text}
     >
+
 <button on:click={handleClick} >{buttonTitle}</button>
+
 </div>
 
 

@@ -4,33 +4,7 @@
 	import AddTodoitem from "./components/AddTodoitem.svelte";
 	import TodoItem from './components/TodoItem.svelte';
 	import {todoItems} from './store/customStore';
-	// import {todoItems} from './store/store';
-//  если обновления стора внутри компонента:
-    // function handleClick (event) {
-	// 	todoItems.update( items => {
-	// 		return [ ...items, {
-	// 		id: uuid(),
-    //         text: event.detail,
-	// 		done: false,
-	// 		}]
-	// 	})
-    // }
 
-	// function handleDoneChange (id, done) {
-    //     todoItems.update( items => {
-	// 		return items.map(item => {
-	// 			if(item.id === id ){
-	// 				return {
-	// 					...item, done
-	// 				}
-	// 			} else {
-	// 				return item
-	// 			}
-	// 		})
-	// 	})
-
-    // }
-	
 	   function handleClick (event) {
 		todoItems.add(event.detail)
     }
