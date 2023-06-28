@@ -32,7 +32,7 @@ const {subscribe, set, update, } = writable([])
             })
         },
 
-        remove: () => {
+        remove: (id) => {
             update( items => {
                 return items.filter ( item => item.id !== id )
             } )
